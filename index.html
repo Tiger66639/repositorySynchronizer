@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Repositorysynchronizer by Tiger66639</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/Tiger66639/repositorySynchronizer">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/Tiger66639/repositorySynchronizer/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/Tiger66639/repositorySynchronizer/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Repositorysynchronizer</h1>
+          <p>Pentaho Repository Synchronizer</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/Tiger66639">Tiger66639</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a id="repositorysynchronizer" class="anchor" href="#repositorysynchronizer" aria-hidden="true"><span class="octicon octicon-link"></span></a>repositorySynchronizer</h1>
+
+<p>Pentaho Plugin allowing synchronization between JCR and the File System.</p>
+
+<p>PRS depends on the following CTools:</p>
+
+<ul>
+<li>CDF: Community Dashboard Framework</li>
+<li>CDE: Community Dashboard Editor</li>
+<li>CDA: Community Data Access</li>
+<li>CGG: Community Graphics Generator</li>
+<li>
+You can install these packages from the Pentaho Marketplace, or manually download them from <a href="http://ci.pentaho.com">Pentaho's Continuous Integration server</a> and unzip the .zip file to your <code>pentaho-solutions/system</code> folder.</li>
+</ul>
+
+<p>If you are using the Enterprise Edition, we recommend you to install the Pentaho Marketplace. Follow the instructions at <a href="http://pedroalves-bi.blogspot.pt/2013/11/ctools-for-pentaho-50-is-available-cdf.html">Pedro Alves's blog</a>.</p>
+
+<h3>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration</h3>
+
+<p>By default, the Pentaho Repository Synchronizer stores its settings in the file <code>prs.xml</code>, which by default looks like this:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;prs&gt;
+    &lt;locations&gt;
+        &lt;location path="jcr-solution:http://127.0.0.1:8080/pentaho!/" name="JCR"/&gt;
+        &lt;location path="${cpk.solution.system.dir}/../repositorySynchronizer" name="File System"/&gt;
+    &lt;/locations&gt;
+    &lt;excludes&gt;
+        &lt;!-- Exclude all dot folders and files --&gt;
+        &lt;exclude pattern=".*/\.[^/]*(/.*)?"/&gt;
+        &lt;!-- Exclude sample folders --&gt;
+        &lt;exclude pattern=".*/bi-developers(/.*)?"/&gt;
+        &lt;exclude pattern=".*/pentaho-operations-mart(/.*)?"/&gt;
+        &lt;exclude pattern=".*/plugin-samples(/.*)?"/&gt;
+        &lt;exclude pattern=".*/Steel\sWheels(/.*)?"/&gt;
+    &lt;/excludes&gt;
+    &lt;last_synch&gt;0&lt;/last_synch&gt;
+&lt;/prs&gt;
+</code></pre>
+
+<p>Note that:</p>
+
+<ul>
+<li>the variable <code>${cpk.solution.system.dir}</code> points to <code>pentaho-solutions/system</code>
+</li>
+<li>by default, the sample files distributed with a pristine installation are excluded. Dot files such as <code>.git</code> are also ignored.</li>
+</ul>
+
+<h2>
+<a id="pro-tips" class="anchor" href="#pro-tips" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pro tips</h2>
+
+<h3>
+<a id="access-jcr-from-within-spoon" class="anchor" href="#access-jcr-from-within-spoon" aria-hidden="true"><span class="octicon octicon-link"></span></a>Access JCR from within Spoon</h3>
+
+<p>Developing PDI jobs and transformations that manipulate files in the JCR can be a bit hard given the fact that Spoon does not allow you to access the JCR out of the box.</p>
+
+<p>In fact, Spoon requires some jar files to be installed in order to be able to operate with a JCR repository running on a BI server.
+Here's what you need to do:</p>
+
+<ol>
+<li>Copy the file <code>libpensol-TRUNK-SNAPSHOT.jar</code> from <code>biserver/pentaho-solutions/system/repositorySynchronizer/_lib_</code>
+into <code>data-integration/lib</code>.</li>
+<li>Copy the file <code>pentaho-platform-repository-5.*-stable.jar</code> from 
+<code>biserver/tomcat/webapps/pentaho/WEB-INF/lib</code> into <code>data-integration/lib</code>.</li>
+</ol>
+
+<p>Now you can access the files in the JCR by using a root URI such as <code>jcr-solution:http://user:password@127.0.0.1:8080/pentaho!/</code>. Note that from within Spoon, the URI needs to contain the credentials to access the server.</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
