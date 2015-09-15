@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Tiger66639/repositorySynchronizer.svg)](https://travis-ci.org/Tiger66639/repositorySynchronizer)
 repositorySynchronizer
 ===
 Pentaho Plugin allowing synchronization between JCR and the File System.
